@@ -15,6 +15,8 @@ public class LevelSelector : MonoBehaviour {
 	void Awake () {
         GameObject persistentGameObject = GameObject.Find("PersistentState");
 
+        levelOrder = LevelProvider.getLevels();
+
         if (persistentGameObject != null)
         {
             PersistentState persistentScript = persistentGameObject.GetComponent<PersistentState>();
@@ -35,13 +37,8 @@ public class LevelSelector : MonoBehaviour {
     public void NextLevel()
     {
         currentLevel = getNextLevel();
-        /*
-        GameObject persistentGameObject = GameObject.Find("PersistentState");
-        if (persistentGameObject != null)
-        {
-            PersistentState persistentScript = persistentGameObject.GetComponent<PersistentState>();
-            persistentScript.currentLevel = currentLevel;
-        }*/
+
+        Debug.Log(currentLevel);
 
         tiledBoardFactory.levelName = currentLevel;
         gameManager.setBoardFactory(tiledBoardFactory);
