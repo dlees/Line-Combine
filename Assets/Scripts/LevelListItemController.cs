@@ -15,6 +15,8 @@ public class LevelListItemController : MonoBehaviour {
 
     public void selectLevel()
     {
+        GameObject.Find("ModifiableState").GetComponent<ModifiableState>().CurrentLevel = levelNameString;
+    
 
     }
 }
