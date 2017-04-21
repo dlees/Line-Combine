@@ -25,6 +25,9 @@ public class GameEvaluator : MonoBehaviour {
     public GoalView nextLevelGoalView;
     public GoalView bonusPointsGoalView;
 
+    public BestScoreController bestScoreController;
+    public GameManager gameManager;
+
     private int numConnectionsToRoot = 0;
     public int NumConnectionsToRoot
     {
@@ -110,20 +113,10 @@ public class GameEvaluator : MonoBehaviour {
                 createFadingTextAtBlock(index, "-5", Color.red);
             }
         }
-//         foreach (Vector2 index in goalPoints)
-//         {
-//             if (justConnectedIndicies.Contains(index))
-//             {
-//                 createFadingTextAtBlock(index, "Red", Color.green);
-//             }
-//             else if (justDisconnectedIndicies.Contains(index))
-//             {
-//                 createFadingTextAtBlock(index, "Red", Color.red);
-//             }
-//         }
 
         previouslyConnected = curConnected;
         previouslyConnectedIndicies = connectedIndicies;
+        bestScoreController.updateBestScore(gameManager.currentLevelName);
     }
 
     private void createFadingTextAtBlock(Vector2 blockIndex, string text, Color color)

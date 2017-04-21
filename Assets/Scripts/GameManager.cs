@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public CellPool pool;
     public GameEvaluator evaluator;
     public ActionManager actionManager;
+    public BestScoreController bestScore;
 
     public BoardStateSaver boardStateSaver;
     public string currentLevelName;
@@ -20,27 +21,27 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
         StartWithoutSavedProgress();
-        //StartFromSavedProgress();
     }
 
     public void Restart()
     {
-        boardStateSaver.saveBoard(board, currentLevelName);
-
-        deleteCurrentGame();
-
-        Start();
+        RestartWithoutSavedProgress();
     }
 
     public void RestartWithoutSavedProgress()
     {
-        boardStateSaver.saveBoard(board, currentLevelName);
-
         deleteCurrentGame();
         
-        StartWithoutSavedProgress();
-        
+        StartWithoutSavedProgress();        
     }
+
+    public void RestartFromSavedProgress()
+    {
+        deleteCurrentGame();
+
+        StartFromSavedProgress();
+    }
+
     private void StartFromSavedProgress()
     {
         boardFactory.createBoard(board, background);
@@ -53,20 +54,27 @@ public class GameManager : MonoBehaviour {
 
         board.setupGraph();
         evaluator.evaluateConnections();
+        bestScore.loadBestScore(currentLevelName);
     }
 
     private void StartWithoutSavedProgress()
     {
-
         boardFactory.createBoard(board, background);
         currentLevelName = boardFactory.getLevelName();
         evaluator.loadInfoFromBackground();
 
         board.setupGraph();
         evaluator.evaluateConnections();
+        bestScore.loadBestScore(currentLevelName);
     }
+
     private void deleteCurrentGame()
     {
+        if (bestScore.isCurrentBestScore()) {
+            boardStateSaver.saveBoard(board, currentLevelName);
+            bestScore.saveBestScore(currentLevelName);
+        }
+
         // Here you can see similarities between board and background...
         // This is bound to turn into a list or map
         board.deleteAll();

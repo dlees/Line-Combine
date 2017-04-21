@@ -4,26 +4,51 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class BoardStateSaver : MonoBehaviour {
+    
+    public void saveScore(bool[] goalConditions, string levelName)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream file = File.Create(getFileName("bestScore-" + levelName));
+        binaryFormatter.Serialize(file, goalConditions);
+        file.Close();
+    }
+
+    public bool[] loadBestScore(string levelName)
+    {
+        if (File.Exists(getFileName("bestScore-" + levelName)))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream file = File.Open(getFileName("bestScore-" + levelName), FileMode.Open);
+            bool[] goalConditions = (bool[])binaryFormatter.Deserialize(file);
+            file.Close();
+            Debug.Log(goalConditions[0]);
+            return goalConditions;
+        }
+        else
+        {
+            Debug.Log("Can't find " + getFileName("bestScore-" + levelName));
+            return new bool[]{ false, false, false};
+        }
+    }
 
     public void saveBoard(Board board, string levelName)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream file = File.Create(getFileName(levelName));
+        FileStream file = File.Create(getFileName("boardLayouts -" + levelName));
 
         BoardState boardState = new BoardState(board);
 
         binaryFormatter.Serialize(file, boardState);
         file.Close();
-        Debug.Log("Saved " + getFileName(levelName));
 
     }
 
     public int[,] loadBoardState(string levelName)
     {
-        if (File.Exists(getFileName(levelName)))
+        if (File.Exists(getFileName("boardLayouts -" + levelName)))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream file = File.Open(getFileName(levelName), FileMode.Open);
+            FileStream file = File.Open(getFileName("boardLayouts -" + levelName), FileMode.Open);
             BoardState boardState = (BoardState)binaryFormatter.Deserialize(file);
             file.Close();
 
@@ -31,7 +56,7 @@ public class BoardStateSaver : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Can't find " + getFileName(levelName));
+            Debug.Log("Can't find " + getFileName("boardLayouts -" + levelName));
             return null;
         }
         
@@ -39,7 +64,7 @@ public class BoardStateSaver : MonoBehaviour {
 
     private string getFileName(string levelName)
     {
-        return Application.persistentDataPath + "/boardLayouts-" + levelName + ".dat";
+        return Application.persistentDataPath + "/" + levelName + ".dat";
     }
 
     [System.Serializable]
