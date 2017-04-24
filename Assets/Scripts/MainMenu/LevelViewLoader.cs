@@ -32,7 +32,7 @@ public class LevelViewLoader : MonoBehaviour {
 
             if (!completedAllSoFar)
             {
-                levelListItemController.disableLevel();
+           //     levelListItemController.disableLevel();
             }
         }
     }
