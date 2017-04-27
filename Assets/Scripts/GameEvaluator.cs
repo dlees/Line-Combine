@@ -102,7 +102,7 @@ public class GameEvaluator : MonoBehaviour {
 
         IEnumerable<Vector2> justDisconnectedIndicies = previouslyConnectedIndicies.Except(connectedIndicies);
         IEnumerable<Vector2> justConnectedIndicies = connectedIndicies.Except(previouslyConnectedIndicies);
-        foreach (Vector2 index in bonusPoints)
+        /*foreach (Vector2 index in bonusPoints)
         {
             if (justConnectedIndicies.Contains(index))
             {
@@ -113,7 +113,7 @@ public class GameEvaluator : MonoBehaviour {
                 createFadingTextAtBlock(index, "-5", Color.red);
             }
         }
-
+        */
         previouslyConnected = curConnected;
         previouslyConnectedIndicies = connectedIndicies;
         bestScoreController.updateBestScore(gameManager.currentLevelName);

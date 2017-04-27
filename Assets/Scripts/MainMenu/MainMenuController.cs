@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour {
     public Canvas OptionsCanvas;
     public Canvas LevelSelectCanvas;
 
+
     void Awake()
     {
         OptionsCanvas.enabled = false;
@@ -31,5 +32,17 @@ public class MainMenuController : MonoBehaviour {
     {
         MainCanvas.enabled = false;
         LevelSelectCanvas.enabled = true;
+    }
+    
+
+    void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
     }
 }

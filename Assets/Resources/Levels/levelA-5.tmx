@@ -35,7 +35,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Objects" width="5" height="5">
+ <layer name="Objects" width="5" height="5" opacity="0.46">
   <data>
    <tile gid="17"/>
    <tile gid="17"/>

@@ -21,7 +21,6 @@ public class BoardStateSaver : MonoBehaviour {
             FileStream file = File.Open(getFileName("bestScore-" + levelName), FileMode.Open);
             bool[] goalConditions = (bool[])binaryFormatter.Deserialize(file);
             file.Close();
-            Debug.Log(goalConditions[0]);
             return goalConditions;
         }
         else
@@ -60,6 +59,22 @@ public class BoardStateSaver : MonoBehaviour {
             return null;
         }
         
+    }
+
+    public void clearData(string[] levelNames)
+    {
+        foreach (string levelName in levelNames)
+        {
+            if (File.Exists(getFileName("boardLayouts -" + levelName)))
+            {
+                File.Delete(getFileName("boardLayouts -" + levelName));
+            }
+
+            if (File.Exists(getFileName("bestScore-" + levelName)))
+            {
+                File.Delete(getFileName("bestScore-" + levelName));
+            }
+        }
     }
 
     private string getFileName(string levelName)

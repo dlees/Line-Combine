@@ -8,10 +8,17 @@ public class LevelViewLoader : MonoBehaviour {
     public GameObject ContentPanel;
     public GameObject ListItemPrefab;
 
+    public Text starCount;
+
+    public BoardStateSaver boardStateSaver;
+
     // Use this for initialization
     void Start () {
         string[] levels = LevelProvider.getLevels();
-        bool completedAllSoFar = true;
+        bool lastLevelCompleted = true;
+
+        int totalObtainedStars = 0;
+        int totalStarsInGame = 0;
 
         foreach (string levelName in levels) {
             GameObject newListItem = Instantiate(ListItemPrefab) as GameObject;
@@ -19,23 +26,38 @@ public class LevelViewLoader : MonoBehaviour {
             LevelListItemController levelListItemController = newListItem.GetComponent<LevelListItemController>();
             levelListItemController.levelNameString = levelName;
             bool[] score = levelListItemController.bestScoreController.loadBestScore(levelName);
-            
+
             // If we haven't beat the first challenge in the level, 
             // we can't move on.
-            if (score[0] == false)
+            if (!lastLevelCompleted)
             {
-                completedAllSoFar = false;
+                levelListItemController.disableLevel();
             }
+            lastLevelCompleted = score[0];
 
             newListItem.transform.parent = ContentPanel.transform;
             newListItem.transform.localScale = Vector3.one;
 
-            if (!completedAllSoFar)
+            for (int i = 0; i < score.Length; i++)
             {
-           //     levelListItemController.disableLevel();
+                totalStarsInGame++;
+                if (score[i])
+                {
+                    totalObtainedStars++;
+                }
             }
         }
+
+        starCount.text = totalObtainedStars.ToString() + "/" + totalStarsInGame.ToString();
     }
 
-
+    public void clearData()
+    {
+        boardStateSaver.clearData(LevelProvider.getLevels());
+        foreach (Transform child in ContentPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        Start();
+    }
 }

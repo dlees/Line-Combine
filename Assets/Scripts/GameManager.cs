@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour {
     public string currentLevelName;
 
     public CellPipesFactory cellPipesFactory;
+
+    public Text title;
 
     void Start()
     {
@@ -47,14 +50,21 @@ public class GameManager : MonoBehaviour {
         boardFactory.createBoard(board, background);
         currentLevelName = boardFactory.getLevelName();
         evaluator.loadInfoFromBackground();
+
         if (currentLevelName != "random")
         {
             loadProgressFromSavedState(board);
         }
 
+        startGame();
+    }
+
+    private void startGame()
+    {
         board.setupGraph();
         evaluator.evaluateConnections();
         bestScore.loadBestScore(currentLevelName);
+        title.text = currentLevelName;
     }
 
     private void StartWithoutSavedProgress()
@@ -63,17 +73,12 @@ public class GameManager : MonoBehaviour {
         currentLevelName = boardFactory.getLevelName();
         evaluator.loadInfoFromBackground();
 
-        board.setupGraph();
-        evaluator.evaluateConnections();
-        bestScore.loadBestScore(currentLevelName);
+        startGame();
     }
 
     private void deleteCurrentGame()
     {
-        if (bestScore.isCurrentBestScore()) {
-            boardStateSaver.saveBoard(board, currentLevelName);
-            bestScore.saveBestScore(currentLevelName);
-        }
+        saveBoardIfBest();
 
         // Here you can see similarities between board and background...
         // This is bound to turn into a list or map
@@ -82,6 +87,15 @@ public class GameManager : MonoBehaviour {
         pool.deleteAll();
         evaluator.reset();
         actionManager.reset();
+    }
+
+    public void saveBoardIfBest()
+    {
+        if (bestScore.isCurrentBestScore())
+        {
+            boardStateSaver.saveBoard(board, currentLevelName);
+            bestScore.saveBestScore(currentLevelName);
+        }
     }
 
     private void loadProgressFromSavedState(Board board)
@@ -110,5 +124,15 @@ public class GameManager : MonoBehaviour {
     {
         boardFactory = factory;
     }
-	
+
+    void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+    }
 }
