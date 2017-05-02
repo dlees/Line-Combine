@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour {
     public Canvas OptionsCanvas;
     public Canvas LevelSelectCanvas;
     public Canvas CreditsCanvas;
+    public Canvas HelpScreenCanvas;
 
 
     void Awake()
@@ -15,6 +16,7 @@ public class MainMenuController : MonoBehaviour {
         OptionsCanvas.enabled = false;
         LevelSelectCanvas.enabled = false;
         CreditsCanvas.enabled = false;
+        HelpScreenCanvas.enabled = false;
 	}
 
     public void OptionsOn()
@@ -28,6 +30,7 @@ public class MainMenuController : MonoBehaviour {
         OptionsCanvas.enabled = false;
         LevelSelectCanvas.enabled = false;
         CreditsCanvas.enabled = false;
+        HelpScreenCanvas.enabled = false;
         MainCanvas.enabled = true;
 	}
 
@@ -41,6 +44,12 @@ public class MainMenuController : MonoBehaviour {
     {
         MainCanvas.enabled = false;
         CreditsCanvas.enabled = true;
+    }
+
+    public void HelpScreenOn()
+    {
+        MainCanvas.enabled = false;
+        HelpScreenCanvas.enabled = true;
     }
 
     public void GoToWebsite()
