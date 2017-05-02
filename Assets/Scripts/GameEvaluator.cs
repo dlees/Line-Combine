@@ -116,7 +116,12 @@ public class GameEvaluator : MonoBehaviour {
         */
         previouslyConnected = curConnected;
         previouslyConnectedIndicies = connectedIndicies;
-        bestScoreController.updateBestScore(gameManager.currentLevelName);
+
+        if (bestScoreController.isCurrentBestScore())
+        {
+            bestScoreController.saveBestScore(gameManager.currentLevelName);
+            gameManager.boardStateSaver.saveBoard(board, gameManager.currentLevelName);
+        }
     }
 
     private void createFadingTextAtBlock(Vector2 blockIndex, string text, Color color)

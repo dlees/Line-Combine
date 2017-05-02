@@ -8,7 +8,7 @@ public class AllConnectedGoalCondition : GoalCondition
     
     public override string getGoalMessage() 
     {
-        return "Fill the board with combined lines";
+        return "Connect all Squares together";
     }
 
     public override bool isGoalSatisfied()

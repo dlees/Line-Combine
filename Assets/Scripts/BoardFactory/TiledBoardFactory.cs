@@ -50,7 +50,7 @@ public class TiledBoardFactory : BoardFactory
 
         putTilesInBoard(ref map, board, background);
 
-        pool.logNumOfEachType();
+        //pool.logNumOfEachType();
         if (pool == null)
         {
             randomize(ref boardSize, board);

@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour {
     private void startGame()
     {
         board.setupGraph();
-        evaluator.evaluateConnections();
         bestScore.loadBestScore(currentLevelName);
+        evaluator.evaluateConnections();
         title.text = currentLevelName;
     }
 

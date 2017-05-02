@@ -10,7 +10,7 @@ public class LevelSelector : MonoBehaviour {
 
     public string[] levelOrder;
 
-    public string currentLevel = "level1";
+    public string currentLevel = "A-1";
 
 	void Awake () {
         GameObject persistentGameObject = GameObject.Find("PersistentState");
@@ -53,6 +53,6 @@ public class LevelSelector : MonoBehaviour {
                 return levelOrder[(i + 1) % levelOrder.Length];
             }
         }
-        return "level4";
+        return "A-1";
     }
 }

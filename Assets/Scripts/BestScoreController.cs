@@ -39,12 +39,7 @@ public class BestScoreController : MonoBehaviour {
         bool[] score = GetScore();
         updateToggles(score);
         boardStateSaver.saveScore(score, levelName);
-    }
-
-    public void updateBestScore(string levelName)
-    {
-        bool[] score = GetScore();
-        updateToggles(score);
+        bestOverallScore = calculateOverallScore(score);
     }
 
     private bool[] GetScore()

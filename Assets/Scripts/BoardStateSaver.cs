@@ -33,7 +33,7 @@ public class BoardStateSaver : MonoBehaviour {
     public void saveBoard(Board board, string levelName)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream file = File.Create(getFileName("boardLayouts -" + levelName));
+        FileStream file = File.Create(getFileName("boardLayouts-" + levelName));
 
         BoardState boardState = new BoardState(board);
 
@@ -44,10 +44,10 @@ public class BoardStateSaver : MonoBehaviour {
 
     public int[,] loadBoardState(string levelName)
     {
-        if (File.Exists(getFileName("boardLayouts -" + levelName)))
+        if (File.Exists(getFileName("boardLayouts-" + levelName)))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream file = File.Open(getFileName("boardLayouts -" + levelName), FileMode.Open);
+            FileStream file = File.Open(getFileName("boardLayouts-" + levelName), FileMode.Open);
             BoardState boardState = (BoardState)binaryFormatter.Deserialize(file);
             file.Close();
 
@@ -55,7 +55,7 @@ public class BoardStateSaver : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Can't find " + getFileName("boardLayouts -" + levelName));
+            Debug.Log("Can't find " + getFileName("boardLayouts-" + levelName));
             return null;
         }
         
@@ -65,9 +65,9 @@ public class BoardStateSaver : MonoBehaviour {
     {
         foreach (string levelName in levelNames)
         {
-            if (File.Exists(getFileName("boardLayouts -" + levelName)))
+            if (File.Exists(getFileName("boardLayouts-" + levelName)))
             {
-                File.Delete(getFileName("boardLayouts -" + levelName));
+                File.Delete(getFileName("boardLayouts-" + levelName));
             }
 
             if (File.Exists(getFileName("bestScore-" + levelName)))
