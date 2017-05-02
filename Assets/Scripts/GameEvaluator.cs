@@ -54,8 +54,8 @@ public class GameEvaluator : MonoBehaviour {
         bonusPoints = background.getCellsOfType("bonus");
         goalPoints = background.getCellsOfType("goal");
 
-        nextLevelGoalView.condition = new ConnectStartToPointsCondition(goalPoints, "Connect Blue to Red", connectedState, board);
-        bonusPointsGoalView.condition = new ConnectStartToPointsCondition(bonusPoints, "Connect Blue to Green", connectedState, board);
+        nextLevelGoalView.condition = new ConnectStartToPointsCondition(goalPoints, "Connect Blue and Red Squares", connectedState, board);
+        bonusPointsGoalView.condition = new ConnectStartToPointsCondition(bonusPoints, "Connect Blue and Green Squares", connectedState, board);
 
         List<Vector2> walls = background.getCellsOfType("wall");
         
