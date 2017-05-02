@@ -34,7 +34,7 @@ public class StarGenerator : MonoBehaviour {
 
 		GameObject star = (GameObject)Instantiate (StarGO[indexToChoose]);
 
-		star.transform.position = new Vector2(min.x, Random.Range(min.x, max.x));
+		star.transform.position = new Vector2(min.x, Random.Range(min.y, max.y));
 		star.transform.parent = transform;
 
 		ScheduleNextSpawn ();
