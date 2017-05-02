@@ -32,6 +32,7 @@ public class ActionStack : MonoBehaviour {
     public void addAction(Action action)
     {
         undoStack.Push(action);
+        redoStack.Clear();
     }
 
     public void Clear()
