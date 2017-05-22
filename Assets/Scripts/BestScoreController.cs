@@ -42,7 +42,7 @@ public class BestScoreController : MonoBehaviour {
         bestOverallScore = calculateOverallScore(score);
     }
 
-    private bool[] GetScore()
+    public bool[] GetScore()
     {
         bool[] score = new bool[goals.Length];
         for (int i = 0; i < goals.Length; i++)
