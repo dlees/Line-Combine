@@ -16,6 +16,8 @@ public class GoalView : MonoBehaviour {
 	void Update ()
     {
         messageBox.text = condition.getGoalMessage();
-        toggle.toggle(condition.isGoalSatisfied());
+
+        // This is bad. The view is updating a toggle???
+        toggle.toggle(condition.isConditionSatisfied());
 	}
 }

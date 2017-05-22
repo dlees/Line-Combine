@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-abstract public class GoalCondition : MonoBehaviour {
+abstract public class GoalCondition : Condition {
 
     public abstract string getGoalMessage();
-    public abstract bool isGoalSatisfied();
 }

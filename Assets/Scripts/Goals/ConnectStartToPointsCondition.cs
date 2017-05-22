@@ -22,7 +22,7 @@ public class ConnectStartToPointsCondition : GoalCondition
         return goalString;
     }
 
-    public override bool isGoalSatisfied()
+    public override bool isConditionSatisfied()
     {
         return isConnectedToGoal();
     }

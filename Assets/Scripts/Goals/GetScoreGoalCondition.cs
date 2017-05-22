@@ -11,7 +11,7 @@ public class GetScoreGoalCondition : GoalCondition
         return "Earn " + scoreToAchieve + " points";
     }
 
-    public override bool isGoalSatisfied()
+    public override bool isConditionSatisfied()
     {
         return evaluator.score > scoreToAchieve;
     }

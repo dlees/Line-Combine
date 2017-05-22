@@ -28,6 +28,7 @@ public class ConnectedState : MonoBehaviour {
         connectedIndicies.Clear();
     }
 
+    // This should be a view of the state, it should get updated an cached. this foreach looks dangerous
     private HashSet<Vector2> getConnectedIndicies(HashSet<Node> curConnected)
     {
         HashSet<Vector2> connectedIndicies = new HashSet<Vector2>();

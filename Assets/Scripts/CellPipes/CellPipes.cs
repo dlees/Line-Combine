@@ -10,6 +10,13 @@ public class CellPipes : MonoBehaviour
 
     public PipesTile tile;
 
+    private bool isConnected;
+
+    public bool IsConnected
+    {
+        get { return isConnected; }
+    }
+
     public void setupBasedOnBlockTypeInTileset(int type)
     {
         tile.setupBasedOnBlockTypeInTileset(type);
@@ -43,11 +50,13 @@ public class CellPipes : MonoBehaviour
 
     public void markConnected()
     {
+        isConnected = true;
         tile.markConnected();
     }
 
     public void markDisconnected()
     {
+        isConnected = false;
         tile.markDisconnected();
     }
 

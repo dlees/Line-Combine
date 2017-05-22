@@ -11,7 +11,7 @@ public class AllConnectedGoalCondition : GoalCondition
         return "Connect all Squares together";
     }
 
-    public override bool isGoalSatisfied()
+    public override bool isConditionSatisfied()
     {
         return connectedState.curConnected.Count == board.maxConnectionsPossible;
     }

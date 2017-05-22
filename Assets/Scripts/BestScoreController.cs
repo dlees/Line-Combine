@@ -47,7 +47,7 @@ public class BestScoreController : MonoBehaviour {
         bool[] score = new bool[goals.Length];
         for (int i = 0; i < goals.Length; i++)
         {
-            score[i] = goals[i].condition.isGoalSatisfied();
+            score[i] = goals[i].condition.isConditionSatisfied();
         }
         return score;
     }
